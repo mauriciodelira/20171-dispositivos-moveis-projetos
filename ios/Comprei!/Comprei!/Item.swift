@@ -10,7 +10,7 @@ import Foundation
 
 class Item: NSObject, NSCoding {
     var nome: String!
-    var valor: Float?
+    var valor: Float!
     var qtde: Int!
     
     override var description: String{
