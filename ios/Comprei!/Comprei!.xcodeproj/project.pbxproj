@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		840C49DA1F573DAB0075A169 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C49D91F573DAB0075A169 /* AppDelegate.swift */; };
-		840C49DC1F573DAB0075A169 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C49DB1F573DAB0075A169 /* ViewController.swift */; };
+		840C49DC1F573DAB0075A169 /* FormularioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C49DB1F573DAB0075A169 /* FormularioViewController.swift */; };
 		840C49DF1F573DAB0075A169 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840C49DD1F573DAB0075A169 /* Main.storyboard */; };
 		840C49E21F573DAB0075A169 /* Comprei_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 840C49E01F573DAB0075A169 /* Comprei_.xcdatamodeld */; };
 		840C49E41F573DAB0075A169 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840C49E31F573DAB0075A169 /* Assets.xcassets */; };
 		840C49E71F573DAB0075A169 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840C49E51F573DAB0075A169 /* LaunchScreen.storyboard */; };
+		840C49F21F57416A0075A169 /* ListarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C49F11F57416A0075A169 /* ListarTableViewController.swift */; };
+		840C49F41F5741AB0075A169 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C49F31F5741AB0075A169 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		840C49D61F573DAB0075A169 /* Comprei!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Comprei!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840C49D91F573DAB0075A169 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		840C49DB1F573DAB0075A169 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		840C49DB1F573DAB0075A169 /* FormularioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularioViewController.swift; sourceTree = "<group>"; };
 		840C49DE1F573DAB0075A169 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		840C49E11F573DAB0075A169 /* Comprei_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Comprei_.xcdatamodel; sourceTree = "<group>"; };
 		840C49E31F573DAB0075A169 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840C49E61F573DAB0075A169 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		840C49E81F573DAB0075A169 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		840C49F11F57416A0075A169 /* ListarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListarTableViewController.swift; sourceTree = "<group>"; };
+		840C49F31F5741AB0075A169 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 		840C49EE1F573DDA0075A169 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				840C49F31F5741AB0075A169 /* Item.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -86,7 +91,8 @@
 		840C49F01F573DE70075A169 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				840C49DB1F573DAB0075A169 /* ViewController.swift */,
+				840C49DB1F573DAB0075A169 /* FormularioViewController.swift */,
+				840C49F11F57416A0075A169 /* ListarTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -162,7 +168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				840C49DC1F573DAB0075A169 /* ViewController.swift in Sources */,
+				840C49F41F5741AB0075A169 /* Item.swift in Sources */,
+				840C49F21F57416A0075A169 /* ListarTableViewController.swift in Sources */,
+				840C49DC1F573DAB0075A169 /* FormularioViewController.swift in Sources */,
 				840C49DA1F573DAB0075A169 /* AppDelegate.swift in Sources */,
 				840C49E21F573DAB0075A169 /* Comprei_.xcdatamodeld in Sources */,
 			);
