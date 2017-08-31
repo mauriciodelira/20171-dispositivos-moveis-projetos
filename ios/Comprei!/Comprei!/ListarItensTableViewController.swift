@@ -18,6 +18,7 @@ class ListarItensTableViewCell: UITableViewCell {
 class ListarItensTableViewController: UITableViewController {
 
     var compra: Compra!
+    var listaCompras: ListaCompras!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +102,7 @@ class ListarItensTableViewController: UITableViewController {
             
             // atualiza a tableView pra exibir a mudança na célula
             self.tableView.reloadData()
-            self.compra.salvar()
+            self.listaCompras.salvar()
         }
     }
 
@@ -149,14 +150,18 @@ class ListarItensTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if(segue.identifier == "itens_detalhe") {
-            let itemDetalhe = segue.destination as! FormularioViewController
-            itemDetalhe.compra = self.compra
+        let itemDetalhe = segue.destination as! FormularioViewController
+        itemDetalhe.listaCompras = self.listaCompras
+        itemDetalhe.compra = self.compra
+        
+        if(segue.identifier == "celula_detalhe") {
             
             if let indexPath = tableView.indexPathForSelectedRow{
                 print("row selecionada: \(indexPath.row)")
                 itemDetalhe.item = self.compra.get(pos: indexPath.row)
             }
+        } else if(segue.identifier == "itens_detalhe") {
+            
         }
     }
     

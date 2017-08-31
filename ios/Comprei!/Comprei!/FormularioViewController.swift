@@ -18,6 +18,8 @@ class FormularioViewController: UIViewController {
     var compra: Compra!
     var item: Item?
     var isComprado: Bool! = false
+    
+    var listaCompras: ListaCompras!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +36,8 @@ class FormularioViewController: UIViewController {
         if(item != nil) {
             print("formulario| trouxe item! \(String(describing: item?.nome))")
             self.tfNome.text = item?.nome
-            self.tfValor.text = String(describing: item?.valor)
-            self.tfQuantidade.text = String(describing: item?.qtde)
+            self.tfValor.text! = String(describing: item?.valor!)
+            self.tfQuantidade.text! = String(describing: item?.qtde!)
             self.isComprado = item?.comprado
             
             if(item?.isComprado())! {
@@ -83,12 +85,23 @@ class FormularioViewController: UIViewController {
     func salvar() {
         let name = self.tfNome.text
         let valor = Float(self.tfValor.text!)
-        let qtd = Int(self.stQuantidade.value)
+        let qtd = Int(self.tfQuantidade.text!)
+        var comprado: Bool = false
         
-        let item = Item(nome: name!, valor: valor!, qtde: qtd, comprado: isComprado)
+        if(self.btIsComprado.currentImage == #imageLiteral(resourceName: "checked-checkbox-filled.png")) {
+            print("salvar o item: comprado = marcado (true)")
+            comprado = true
+        } else {
+            print("salvar o item: comprado = desmarcado (false)")
+            comprado = false
+        }
         
-        self.compra.addItem(novo: item)
-        self.compra.salvar()
+        let novoItem = Item(nome: name!, valor: valor!, qtde: qtd, comprado: comprado)
+        
+        print(self.compra)
+        
+        self.compra.addItem(novo: novoItem)
+        self.listaCompras.salvar()
         self.navigationController?.popViewController(animated: true)
     }
 

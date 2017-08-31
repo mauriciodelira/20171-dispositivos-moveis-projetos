@@ -19,23 +19,8 @@ class Compra: NSObject, NSCoding {
     }
 
     override init() {
-        super.init()
-        
-        // pega do banco. se nao existir, inicializa o array
-        let obj = NSKeyedUnarchiver.unarchiveObject(withFile: self.diretorio())
-        // print("compra | obj lista compras = \(obj)")
-        
-        if (obj != nil) {
-            // print("compra | buscou arquivo de itens")
-            let temp = obj as! Compra
-            self.itens = temp.itens
-            self.titulo = temp.titulo
-            print("compra | na compra \(self.titulo) tinha \(self.itens.count) itens")
-        }
-        else {
-            // print("compra | nao achou arquivo de itens, inicia arr vazio")
             self.itens = Array<Item>()
-        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,7 +49,7 @@ class Compra: NSObject, NSCoding {
         NSKeyedArchiver.archiveRootObject(self, toFile: self.diretorio())
     }
     
-    func addItem(novo: Item){
+    func addItem(novo: Item!){
         print("compra | add item:\(novo.nome)")
         self.itens.append(novo)
         self.salvar()

@@ -33,9 +33,7 @@ class ListarComprasTableViewController: UITableViewController {
         super.viewWillAppear(true)
         
         self.tableView.reloadData()
-        
-        self.compras.salvar()
-        
+       
     }
     
     override func viewDidLoad() {
@@ -149,6 +147,7 @@ class ListarComprasTableViewController: UITableViewController {
                 let detalheCompra = segue.destination as! ListarItensTableViewController
                 detalheCompra.compra = self.compras.get(pos: selectedRow)
                 detalheCompra.title = self.compras.get(pos: selectedRow).titulo
+                detalheCompra.listaCompras = self.compras
             }    
         }
         
