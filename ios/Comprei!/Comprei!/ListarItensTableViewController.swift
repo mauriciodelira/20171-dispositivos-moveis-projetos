@@ -25,6 +25,9 @@ class ListarItensTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,18 +122,18 @@ class ListarItensTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            compra.delItem(pos: indexPath.row)
+            self.compra.delItem(pos: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            self.listaCompras.salvar()
+        }
     }
     
 
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        compra.moveItem(origem: fromIndexPath.row, destino: to.row)
+        self.compra.moveItem(origem: fromIndexPath.row, destino: to.row)
+        self.listaCompras.salvar()
     }
     
 

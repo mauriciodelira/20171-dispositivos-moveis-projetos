@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -150,14 +149,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Itens" id="nZr-Vf-TkW">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Q3O-fU-8II">
-                                <connections>
-                                    <segue destination="cYG-js-QPn" kind="show" identifier="itens_detalhe" id="qbZ-xb-t8I"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="DJs-iW-GkF"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q3O-fU-8II">
+                            <connections>
+                                <segue destination="cYG-js-QPn" kind="show" identifier="itens_detalhe" id="qbZ-xb-t8I"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxB-6j-cJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -278,6 +274,6 @@
         <image name="unchecked-checkbox-filled.png" width="550" height="550"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GKT-nC-zcx"/>
+        <segue reference="qbZ-xb-t8I"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -66,7 +66,6 @@ class Compra: NSObject, NSCoding {
         let aux = self.itens[origem]
         self.itens[origem] = self.itens[destino]
         self.itens[destino] = aux
-        self.salvar()
     }
     
     func size()-> Int {
