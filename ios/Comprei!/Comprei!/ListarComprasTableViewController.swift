@@ -34,6 +34,8 @@ class ListarComprasTableViewController: UITableViewController {
         
         self.tableView.reloadData()
         
+        self.compras.salvar()
+        
     }
     
     override func viewDidLoad() {

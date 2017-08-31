@@ -32,6 +32,7 @@ class FormularioViewController: UIViewController {
         super.viewWillAppear(true)
         
         if(item != nil) {
+            print("formulario| trouxe item! \(String(describing: item?.nome))")
             self.tfNome.text = item?.nome
             self.tfValor.text = String(describing: item?.valor)
             self.tfQuantidade.text = String(describing: item?.qtde)
@@ -87,6 +88,7 @@ class FormularioViewController: UIViewController {
         let item = Item(nome: name!, valor: valor!, qtde: qtd, comprado: isComprado)
         
         self.compra.addItem(novo: item)
+        self.compra.salvar()
         self.navigationController?.popViewController(animated: true)
     }
 

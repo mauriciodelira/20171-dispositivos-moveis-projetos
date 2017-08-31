@@ -60,8 +60,7 @@ class Compra: NSObject, NSCoding {
     }
     
     func salvar(){
-        print("compra | salvar()")
-        // print("compra | salvando em: \(self.diretorio())")
+        print("compra | salvando em: \(self.diretorio())")
         NSKeyedArchiver.archiveRootObject(self, toFile: self.diretorio())
     }
     

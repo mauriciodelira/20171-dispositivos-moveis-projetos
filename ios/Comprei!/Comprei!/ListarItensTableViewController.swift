@@ -101,6 +101,7 @@ class ListarItensTableViewController: UITableViewController {
             
             // atualiza a tableView pra exibir a mudança na célula
             self.tableView.reloadData()
+            self.compra.salvar()
         }
     }
 

@@ -53,6 +53,7 @@ class ListaCompras: NSObject {
         self.salvar()
     }
     
+    
     func delCompra(pos: Int) {
         // print("listaCompra | deletar compra: pos \(pos)")
         self.compras.remove(at: pos)
@@ -61,9 +62,9 @@ class ListaCompras: NSObject {
     
     func moveCompra(origem: Int, destino: Int){
         // print("listaCompra | Move: origem \(origem) - dest \(destino)")
-        let aux = self.compras[origem]
-        self.compras[origem] = self.compras[destino]
-        self.compras[destino] = aux
+        let aux = self.compras[destino]
+        self.compras[destino] = self.compras[origem]
+        self.compras[origem] = aux
         self.salvar()
     }
     
