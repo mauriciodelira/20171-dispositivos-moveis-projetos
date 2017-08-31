@@ -34,10 +34,11 @@ class FormularioViewController: UIViewController {
         super.viewWillAppear(true)
         
         if(item != nil) {
-            print("formulario| trouxe item! \(String(describing: item?.nome))")
+            print("formulario| trouxe item! \(item!.nome ?? "nada")")
             self.tfNome.text = item?.nome
-            self.tfValor.text! = String(describing: item?.valor!)
-            self.tfQuantidade.text! = String(describing: item?.qtde!)
+            self.tfValor.text = String(describing: item?.valor ?? 0 )
+            self.tfQuantidade.text = String(describing: item?.qtde ?? 0)
+            self.stQuantidade.value = Double(item!.qtde ?? 0)
             self.isComprado = item?.comprado
             
             if(item?.isComprado())! {
