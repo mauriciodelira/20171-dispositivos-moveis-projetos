@@ -18,6 +18,8 @@
 		8459C4C71F574CDD002F88EB /* Compra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C4C61F574CDD002F88EB /* Compra.swift */; };
 		8459C4C91F574FE7002F88EB /* ListaCompras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C4C81F574FE7002F88EB /* ListaCompras.swift */; };
 		8459C4CB1F575470002F88EB /* ListarItensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C4CA1F575470002F88EB /* ListarItensTableViewController.swift */; };
+		98B365521F58718D00B2C8CD /* checked-checkbox-filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B365511F58718D00B2C8CD /* checked-checkbox-filled.png */; };
+		98B365541F58727800B2C8CD /* unchecked-checkbox-filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 98B365531F58727800B2C8CD /* unchecked-checkbox-filled.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		8459C4C61F574CDD002F88EB /* Compra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compra.swift; sourceTree = "<group>"; };
 		8459C4C81F574FE7002F88EB /* ListaCompras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListaCompras.swift; sourceTree = "<group>"; };
 		8459C4CA1F575470002F88EB /* ListarItensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListarItensTableViewController.swift; sourceTree = "<group>"; };
+		98B365511F58718D00B2C8CD /* checked-checkbox-filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked-checkbox-filled.png"; path = "../../../../../Pictures/checked-checkbox-filled.png"; sourceTree = "<group>"; };
+		98B365531F58727800B2C8CD /* unchecked-checkbox-filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unchecked-checkbox-filled.png"; path = "../../../../../Pictures/unchecked-checkbox-filled.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		840C49D81F573DAB0075A169 /* Comprei! */ = {
 			isa = PBXGroup;
 			children = (
+				98B365551F58727C00B2C8CD /* Assets */,
 				840C49F01F573DE70075A169 /* Controller */,
 				840C49EF1F573DE10075A169 /* View */,
 				840C49EE1F573DDA0075A169 /* Model */,
@@ -104,6 +109,15 @@
 				8459C4CA1F575470002F88EB /* ListarItensTableViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		98B365551F58727C00B2C8CD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				98B365511F58718D00B2C8CD /* checked-checkbox-filled.png */,
+				98B365531F58727800B2C8CD /* unchecked-checkbox-filled.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,7 +179,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				840C49E71F573DAB0075A169 /* LaunchScreen.storyboard in Resources */,
+				98B365541F58727800B2C8CD /* unchecked-checkbox-filled.png in Resources */,
 				840C49E41F573DAB0075A169 /* Assets.xcassets in Resources */,
+				98B365521F58718D00B2C8CD /* checked-checkbox-filled.png in Resources */,
 				840C49DF1F573DAB0075A169 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

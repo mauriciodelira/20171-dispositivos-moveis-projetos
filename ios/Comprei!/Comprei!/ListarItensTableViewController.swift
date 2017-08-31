@@ -8,11 +8,16 @@
 
 import UIKit
 
+class ListarItensTableViewCell: UITableViewCell {
+    @IBOutlet weak var lbNomeItem: UILabel!
+    @IBOutlet weak var lbQtdItens: UILabel!
+    @IBOutlet weak var btCheck: UIButton!
+    
+}
+
 class ListarItensTableViewController: UITableViewController {
 
     var compra: Compra!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,18 +47,50 @@ class ListarItensTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return compra.size()
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "celula", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "celula", for: indexPath) as! ListarItensTableViewCell
 
         let item = self.compra.get(pos: indexPath.row)
         
-        cell.textLabel?.text = item.description
+        cell.lbNomeItem.text = item.nome
+        
+        if(item.qtde != 1) {
+            cell.lbQtdItens.text = "\(item.qtde) itens"
+        } else {
+            cell.lbQtdItens.text = "\(item.qtde) item"
+        }
+        
+        
+        // coloca um checkmark ao lado se estiver setado um boolean em item
+        if(item.isComprado()) {
+            cell.btCheck.setImage(#imageLiteral(resourceName: "checked-checkbox-filled.png"), for: UIControlState.normal)
+        } else {
+            cell.btCheck.setImage(#imageLiteral(resourceName: "unchecked-checkbox-filled.png"), for: UIControlState.normal)
+        }
+        
         
         return cell
     }
     
+    @IBAction func toqueCheckBox(_ sender: Any) {
+        
+        let buttonPosition = (sender as AnyObject).convert(CGPoint(), to: tableView) // pega a posição do toque dentro do CGPoint
+        let indexPath = tableView.indexPathForRow(at: buttonPosition) // puxa o indexPath segundo o ponto XY tirado acima
+        
+        if ((indexPath) != nil) {
+            let item = self.compra.get(pos: (indexPath?.row)!)
+            if(item.isComprado()) {
+                print("checkbox: item comprado era true, agora false")
+                item.comprado = false
+            } else {
+                print("checkbox: item comprado era false, agora true")
+                item.comprado = true
+            }
+            tableView.reloadData()
+        }
+        
+    }
 
     
     // Override to support conditional editing of the table view.
@@ -109,6 +146,12 @@ class ListarItensTableViewController: UITableViewController {
             }
             
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+    
     }
     
 

@@ -23,28 +23,29 @@ class Compra: NSObject, NSCoding {
         
         // pega do banco. se nao existir, inicializa o array
         let obj = NSKeyedUnarchiver.unarchiveObject(withFile: self.diretorio())
-        print("compra | obj lista compras = \(obj)")
+        // print("compra | obj lista compras = \(obj)")
         
         if (obj != nil) {
-            print("compra | buscou arquivo de itens")
-            var temp = obj as! Compra
+            // print("compra | buscou arquivo de itens")
+            let temp = obj as! Compra
             self.itens = temp.itens
-            print("compra | no arquivo tinha \(self.itens.count) compras")
+            self.titulo = temp.titulo
+            print("compra | na compra \(self.titulo) tinha \(self.itens.count) itens")
         }
         else {
-            print("compra | nao achou arquivo de itens, inicia arr vazio")
+            // print("compra | nao achou arquivo de itens, inicia arr vazio")
             self.itens = Array<Item>()
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
-        print("descodificando uma compra")
+        // print("descodificando uma compra")
         self.itens = aDecoder.decodeObject(forKey: "itens") as! Array<Item>
         self.titulo = aDecoder.decodeObject(forKey: "titulo") as! String
     }
     
     func encode(with aCoder: NSCoder) {
-        print("tá persistindo uma compra com X itens: \(self.itens.count)")
+        // print("tá persistindo uma compra com X itens: \(self.itens.count)")
         aCoder.encode(self.itens, forKey: "itens")
         aCoder.encode(self.titulo, forKey: "titulo")
     }
@@ -60,7 +61,7 @@ class Compra: NSObject, NSCoding {
     
     func salvar(){
         print("compra | salvar()")
-        print("compra | salvando em: \(self.diretorio())")
+        // print("compra | salvando em: \(self.diretorio())")
         NSKeyedArchiver.archiveRootObject(self, toFile: self.diretorio())
     }
     
@@ -71,13 +72,13 @@ class Compra: NSObject, NSCoding {
     }
     
     func delItem(pos: Int){
-        print("compra | del item:\(pos)")
+        // print("compra | del item:\(pos)")
         self.itens.remove(at: pos)
         self.salvar()
     }
     
     func moveItem(origem: Int, destino: Int){
-        print("compra | origem:\(origem) - dest: \(destino)")
+        // print("compra | origem:\(origem) - dest: \(destino)")
         let aux = self.itens[origem]
         self.itens[origem] = self.itens[destino]
         self.itens[destino] = aux
@@ -94,7 +95,7 @@ class Compra: NSObject, NSCoding {
     
     // quantidade de itens total da compra
     func totalQtd()-> Int {
-        print("compra| total itens")
+        // print("compra| total itens")
         var tot: Int = 0
         
         for item in itens{
@@ -106,7 +107,7 @@ class Compra: NSObject, NSCoding {
     
     // valor total da compra
     func totalValor() -> Float {
-        print("compra| total R$")
+        // print("compra| total R$")
         var tot: Float = 0.0
         
         for item in itens {

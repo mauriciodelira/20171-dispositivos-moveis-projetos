@@ -21,6 +21,9 @@ class FormularioViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(salvar))
+        
+        self.tfNome.keyboardType = UIKeyboardType.alphabet
+        self.tfValor.keyboardType = UIKeyboardType.decimalPad
     }
     
     override func viewWillAppear(_ animated: Bool) {
