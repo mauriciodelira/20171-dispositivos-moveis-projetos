@@ -27,7 +27,8 @@ class Compra: NSObject, NSCoding {
         
         if (obj != nil) {
             print("compra | buscou arquivo de itens")
-            self.itens = obj as! Array<Item>
+            var temp = obj as! Compra
+            self.itens = temp.itens
             print("compra | no arquivo tinha \(self.itens.count) compras")
         }
         else {
@@ -37,11 +38,13 @@ class Compra: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        print("descodificando uma compra")
         self.itens = aDecoder.decodeObject(forKey: "itens") as! Array<Item>
         self.titulo = aDecoder.decodeObject(forKey: "titulo") as! String
     }
     
     func encode(with aCoder: NSCoder) {
+        print("tá persistindo uma compra com X itens: \(self.itens.count)")
         aCoder.encode(self.itens, forKey: "itens")
         aCoder.encode(self.titulo, forKey: "titulo")
     }

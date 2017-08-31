@@ -15,11 +15,11 @@ class ListarComprasTableViewController: UITableViewController {
     
     @IBAction func adicionar(_ sender: UIBarButtonItem) {
         
-        print("Ativou nova compra")
+        // print("Ativou nova compra")
         
         self.present(self.alertNovaCompra, animated: true, completion: nil)
         
-        print("deve ter exibido")
+        // print("deve ter exibido")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class ListarComprasTableViewController: UITableViewController {
             let compra = Compra()
             compra.titulo = tituloCompra
             self.compras.addCompra(nova: compra)
-            print("Nova compra: \(compra.titulo) e qtd de itens: \(compra.size())")
+            // print("Nova compra: \(compra.titulo) e qtd de itens: \(compra.size())")
             
             self.tableView.reloadData()
             
@@ -101,7 +101,7 @@ class ListarComprasTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-            print(" editando ")
+            // print(" editando ")
         }
     }
     

@@ -17,9 +17,14 @@ class ListaCompras: NSObject {
         let obj = NSKeyedUnarchiver.unarchiveObject(withFile: self.diretorio())
         print("listaCompra | obj lista compras = \(obj)")
         if (obj != nil) {
-            print("listaCompra | achou arquivo de compras!! inicia com o que tem")
+            print("listaCompra | achou arquivo de feiras!! inicia com o que tem")
             self.compras = obj as! Array<Compra>
-            print("listaCompra | no arquivo tinha \(compras.count) compras")
+            print("listaCompra | no arquivo tinha \(compras.count) feiras")
+            
+            for compra in self.compras {
+                print("na compra tem \(compra.size()) coisas")
+                print("itens: \(compra.itens)")
+            }
         }
         else {
             print("listaCompra | nao achou arquivo de compras, inicia arr vazio")
@@ -30,7 +35,7 @@ class ListaCompras: NSObject {
     func diretorio() -> String {
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
-        let docPath = "\(path)/compras.dat"
+        let docPath = "\(path)/feiras.dat"
         
         return docPath
         

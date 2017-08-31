@@ -19,9 +19,11 @@ class ListarItensTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +49,7 @@ class ListarItensTableViewController: UITableViewController {
 
         let item = self.compra.get(pos: indexPath.row)
         
-        cell.textLabel?.text = self.compra.description
+        cell.textLabel?.text = item.description
         
         return cell
     }
@@ -96,6 +98,17 @@ class ListarItensTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "itens_detalhe") {
+            let itemDetalhe = segue.destination as! FormularioViewController
+            itemDetalhe.compra = self.compra
+            
+            if let indexPath = tableView.indexPathForSelectedRow{
+                print("row selecionada: \(indexPath.row)")
+                itemDetalhe.item = self.compra.get(pos: indexPath.row)
+            }
+            
+        }
     }
     
 
