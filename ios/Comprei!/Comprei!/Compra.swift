@@ -54,7 +54,7 @@ class Compra: NSObject, NSCoding {
     func diretorio() -> String {
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
-        let docPath = "\(path)/itens.dat"
+        let docPath = "\(path)/itensFeira.dat"
                 
         return docPath
     }

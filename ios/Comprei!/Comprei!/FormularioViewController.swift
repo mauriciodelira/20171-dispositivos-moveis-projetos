@@ -11,11 +11,13 @@ import UIKit
 class FormularioViewController: UIViewController {
     @IBOutlet weak var tfNome: UITextField!
     @IBOutlet weak var tfValor: UITextField!
-    @IBOutlet weak var lbQuantidade: UILabel!
+    @IBOutlet weak var tfQuantidade: UITextField!
     @IBOutlet weak var stQuantidade: UIStepper!
+    @IBOutlet weak var btIsComprado: UIButton!
     
     var compra: Compra!
     var item: Item?
+    var isComprado: Bool! = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +32,17 @@ class FormularioViewController: UIViewController {
         super.viewWillAppear(true)
         
         if(item != nil) {
-            tfNome.text = item?.nome
-            tfValor.text = String(describing: item?.valor)
-            lbQuantidade.text = String(describing: item?.qtde)
+            self.tfNome.text = item?.nome
+            self.tfValor.text = String(describing: item?.valor)
+            self.tfQuantidade.text = String(describing: item?.qtde)
+            self.isComprado = item?.comprado
+            
+            if(item?.isComprado())! {
+                btIsComprado.setImage(#imageLiteral(resourceName: "checked-checkbox-filled.png"), for: UIControlState.normal)
+            } else {
+                btIsComprado.setImage(#imageLiteral(resourceName: "unchecked-checkbox-filled.png"), for: UIControlState.normal)
+            }
+            
         }
     }
 
@@ -42,16 +52,39 @@ class FormularioViewController: UIViewController {
     }
     
     @IBAction func definirQuantidade(_ sender: Any) {
-        self.lbQuantidade.text = String(Int(self.stQuantidade.value))
+        self.tfQuantidade.text = String(Int(self.stQuantidade.value))
     }
     
+    @IBAction func checkComprado(_ sender: Any) {
+        if(self.item != nil) {
+            if(item?.isComprado())! {
+                item?.comprado = false
+                isComprado = false
+                btIsComprado.setImage(#imageLiteral(resourceName: "unchecked-checkbox-filled.png"), for: .normal)
+            }
+            else {
+                item?.comprado = true
+                isComprado = true
+                btIsComprado.setImage(#imageLiteral(resourceName: "checked-checkbox-filled.png"), for: .normal)
+            }
+        } else {
+            if(isComprado)! {
+                isComprado = false
+                btIsComprado.setImage(#imageLiteral(resourceName: "unchecked-checkbox-filled.png"), for: .normal)
+            }
+            else {
+                isComprado = true
+                btIsComprado.setImage(#imageLiteral(resourceName: "checked-checkbox-filled.png"), for: .normal)
+            }
+        }
+    }
     
     func salvar() {
         let name = self.tfNome.text
         let valor = Float(self.tfValor.text!)
         let qtd = Int(self.stQuantidade.value)
         
-        let item = Item(nome: name!, valor: valor!, qtde: qtd)
+        let item = Item(nome: name!, valor: valor!, qtde: qtd, comprado: isComprado)
         
         self.compra.addItem(novo: item)
         self.navigationController?.popViewController(animated: true)

@@ -56,16 +56,18 @@ class ListarItensTableViewController: UITableViewController {
         cell.lbNomeItem.text = item.nome
         
         if(item.qtde != 1) {
-            cell.lbQtdItens.text = "\(item.qtde) itens"
+            cell.lbQtdItens.text = "\(String(item.qtde)) itens"
         } else {
-            cell.lbQtdItens.text = "\(item.qtde) item"
+            cell.lbQtdItens.text = "\(String(item.qtde)) item"
         }
         
         
         // coloca um checkmark ao lado se estiver setado um boolean em item
         if(item.isComprado()) {
+            // a propriedade Bool comprado de Item == true: a imagem é um checkbox marcado
             cell.btCheck.setImage(#imageLiteral(resourceName: "checked-checkbox-filled.png"), for: UIControlState.normal)
         } else {
+            // a propriedade == false: a imagem é um checkbox desmarcado
             cell.btCheck.setImage(#imageLiteral(resourceName: "unchecked-checkbox-filled.png"), for: UIControlState.normal)
         }
         
@@ -73,13 +75,22 @@ class ListarItensTableViewController: UITableViewController {
         return cell
     }
     
+    // ao clicar no UIButton da custom cell (que é o nosso checkbox), vem pra essa função
     @IBAction func toqueCheckBox(_ sender: Any) {
         
-        let buttonPosition = (sender as AnyObject).convert(CGPoint(), to: tableView) // pega a posição do toque dentro do CGPoint
-        let indexPath = tableView.indexPathForRow(at: buttonPosition) // puxa o indexPath segundo o ponto XY tirado acima
+        // pega a posição do toque dentro do CGPoint (um mapa de coordenadas XY):
+        let buttonClickPosition = (sender as AnyObject).convert(CGPoint(), to: tableView)
         
+        // puxa o indexPath segundo o ponto XY tirado acima, retornando um NSIndexPath
+        let indexPath = self.tableView.indexPathForRow(at: buttonClickPosition)
+        
+        // verifica se realmente conseguiu encontrar um indexPath válido
         if ((indexPath) != nil) {
+            
+            // puxa o item daquela posição específica que foi clicado
             let item = self.compra.get(pos: (indexPath?.row)!)
+            
+            // dentro desse if vai alterar a propriedade. Se era true, fica false, e vice versa
             if(item.isComprado()) {
                 print("checkbox: item comprado era true, agora false")
                 item.comprado = false
@@ -87,9 +98,10 @@ class ListarItensTableViewController: UITableViewController {
                 print("checkbox: item comprado era false, agora true")
                 item.comprado = true
             }
-            tableView.reloadData()
+            
+            // atualiza a tableView pra exibir a mudança na célula
+            self.tableView.reloadData()
         }
-        
     }
 
     
@@ -144,7 +156,6 @@ class ListarItensTableViewController: UITableViewController {
                 print("row selecionada: \(indexPath.row)")
                 itemDetalhe.item = self.compra.get(pos: indexPath.row)
             }
-            
         }
     }
     

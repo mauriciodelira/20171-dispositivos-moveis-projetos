@@ -23,7 +23,7 @@ class ListarComprasTableViewController: UITableViewController {
     @IBAction func adicionar(_ sender: UIBarButtonItem) {
         
         // print("Ativou nova compra")
-        
+        self.alertNovaCompra.textFields?[0].text = ""
         self.present(self.alertNovaCompra, animated: true, completion: nil)
         
         // print("deve ter exibido")
@@ -42,6 +42,7 @@ class ListarComprasTableViewController: UITableViewController {
         self.alertNovaCompra.addTextField { (textField) in
             textField.placeholder = "Título da compra"
             textField.keyboardType = UIKeyboardType.alphabet
+            textField.text = ""
         }
         
         self.alertNovaCompra.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -139,12 +140,16 @@ class ListarComprasTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let indexPath = tableView.indexPathForSelectedRow{
-            let selectedRow = indexPath.row
-            let detalheCompra = segue.destination as! ListarItensTableViewController
-            detalheCompra.compra = self.compras.get(pos: selectedRow)
-            detalheCompra.title = self.compras.get(pos: selectedRow).titulo
+        
+        if (segue.identifier == "compras_itens") {
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let selectedRow = indexPath.row
+                let detalheCompra = segue.destination as! ListarItensTableViewController
+                detalheCompra.compra = self.compras.get(pos: selectedRow)
+                detalheCompra.title = self.compras.get(pos: selectedRow).titulo
+            }    
         }
+        
         
     }
     

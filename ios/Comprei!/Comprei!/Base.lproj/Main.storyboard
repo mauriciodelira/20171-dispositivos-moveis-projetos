@@ -67,7 +67,7 @@
                                     <outlet property="lbQtdItensCompra" destination="9PJ-jr-FkA" id="tpi-d5-mwh"/>
                                     <outlet property="lbTituloCompra" destination="dBR-vN-LQO" id="4jZ-kO-6Ls"/>
                                     <outlet property="lbTotalCompra" destination="XRD-vv-Dw1" id="urK-6x-8i4"/>
-                                    <segue destination="GdM-7c-AgK" kind="show" id="ohx-fo-mvc"/>
+                                    <segue destination="GdM-7c-AgK" kind="show" identifier="compras_itens" id="ohx-fo-mvc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -140,6 +140,7 @@
                                     <outlet property="btCheck" destination="3uS-Hm-eo9" id="YUU-OK-DR9"/>
                                     <outlet property="lbNomeItem" destination="uCB-4p-tVM" id="Dlu-s3-R1c"/>
                                     <outlet property="lbQtdItens" destination="DdM-22-ffc" id="yEd-jW-kVj"/>
+                                    <segue destination="cYG-js-QPn" kind="show" identifier="celula_detalhe" id="GKT-nC-zcx"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -176,61 +177,77 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSU-fJ-IKH">
-                                <rect key="frame" x="16" y="127" width="51" height="21"/>
+                                <rect key="frame" x="16" y="142" width="105" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maçã" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-dj-jKR">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maçã" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Oer-dj-jKR">
                                 <rect key="frame" x="16" y="156" width="288" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Valor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeQ-A7-IoW">
-                                <rect key="frame" x="16" y="232" width="44" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Valor unitário" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeQ-A7-IoW">
+                                <rect key="frame" x="16" y="214" width="117" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comprado" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSa-lY-whI">
+                                <rect key="frame" x="210" y="214" width="94" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="R$ 1.00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ZY-lB-Jeg">
-                                <rect key="frame" x="68" y="229" width="236" height="30"/>
+                                <rect key="frame" x="16" y="229" width="154" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantidade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXJ-eG-wyX">
-                                <rect key="frame" x="16" y="305" width="94" height="21"/>
+                                <rect key="frame" x="16" y="296" width="94" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlE-Io-aw6">
-                                <rect key="frame" x="152" y="305" width="34" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="QA4-bw-xa2">
-                                <rect key="frame" x="210" y="297" width="94" height="29"/>
+                                <rect key="frame" x="210" y="313" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="definirQuantidade:" destination="cYG-js-QPn" eventType="valueChanged" id="aMR-ml-3dm"/>
                                 </connections>
                             </stepper>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FR-YE-dtZ">
+                                <rect key="frame" x="16" y="312" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnJ-sa-pB8">
+                                <rect key="frame" x="262" y="229" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <state key="normal" title="Checked" image="unchecked-checkbox-filled.png"/>
+                                <connections>
+                                    <action selector="checkComprado:" destination="cYG-js-QPn" eventType="touchUpInside" id="DCE-qO-EZn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="lbQuantidade" destination="AlE-Io-aw6" id="ezx-p9-s37"/>
+                        <outlet property="btIsComprado" destination="KnJ-sa-pB8" id="ODh-hB-eT3"/>
                         <outlet property="stQuantidade" destination="QA4-bw-xa2" id="zLr-rE-dr1"/>
                         <outlet property="tfNome" destination="Oer-dj-jKR" id="Tbs-nw-Tsa"/>
+                        <outlet property="tfQuantidade" destination="8FR-YE-dtZ" id="GsI-SX-UhY"/>
                         <outlet property="tfValor" destination="7ZY-lB-Jeg" id="OIa-WQ-tom"/>
                     </connections>
                 </viewController>
@@ -260,4 +277,7 @@
     <resources>
         <image name="unchecked-checkbox-filled.png" width="550" height="550"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GKT-nC-zcx"/>
+    </inferredMetricsTieBreakers>
 </document>

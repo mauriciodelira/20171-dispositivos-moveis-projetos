@@ -35,7 +35,7 @@ class ListaCompras: NSObject {
     func diretorio() -> String {
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
-        let docPath = "\(path)/feiras.dat"
+        let docPath = "\(path)/listaFeiras.dat"
         
         return docPath
         

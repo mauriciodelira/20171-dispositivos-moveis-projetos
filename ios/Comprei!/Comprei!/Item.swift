@@ -18,11 +18,11 @@ class Item: NSObject, NSCoding {
         return self.nome
     }
     
-    init(nome: String!, valor: Float! = 0.0, qtde: Int! = 0) {
+    init(nome: String!, valor: Float! = 0.0, qtde: Int! = 0, comprado: Bool! = false) {
         self.nome = nome
         self.valor = valor
         self.qtde = qtde
-        self.comprado = false
+        self.comprado = comprado
     }
     
     //memoria >> arquivo
