@@ -8,6 +8,13 @@
 
 import UIKit
 
+class ListarComprasTableViewCell: UITableViewCell {
+    @IBOutlet weak var lbTituloCompra: UILabel!
+    @IBOutlet weak var lbQtdItensCompra: UILabel!
+    @IBOutlet weak var lbTotalCompra: UILabel!
+    
+}
+
 class ListarComprasTableViewController: UITableViewController {
 
     var compras = ListaCompras()
@@ -16,7 +23,7 @@ class ListarComprasTableViewController: UITableViewController {
     @IBAction func adicionar(_ sender: UIBarButtonItem) {
         
         // print("Ativou nova compra")
-        
+        self.alertNovaCompra.textFields?[0].text = ""
         self.present(self.alertNovaCompra, animated: true, completion: nil)
         
         // print("deve ter exibido")
@@ -26,7 +33,7 @@ class ListarComprasTableViewController: UITableViewController {
         super.viewWillAppear(true)
         
         self.tableView.reloadData()
-        
+       
     }
     
     override func viewDidLoad() {
@@ -34,6 +41,8 @@ class ListarComprasTableViewController: UITableViewController {
 
         self.alertNovaCompra.addTextField { (textField) in
             textField.placeholder = "Título da compra"
+            textField.keyboardType = UIKeyboardType.alphabet
+            textField.text = ""
         }
         
         self.alertNovaCompra.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -73,12 +82,18 @@ class ListarComprasTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "celula", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "celula", for: indexPath) as! ListarComprasTableViewCell
 
         // Configure the cell...
         let compra = self.compras.get(pos: indexPath.row)
 
-        cell.textLabel?.text = compra.description
+        cell.lbTotalCompra.text = "R$ \(compra.totalValor())"
+        cell.lbTituloCompra.text = compra.titulo
+        if(compra.itens.count != 1) {
+            cell.lbQtdItensCompra.text = "\(compra.itens.count) itens"
+        }else {
+            cell.lbQtdItensCompra.text = "\(compra.itens.count) item"
+        }
         
         return cell
     }
@@ -99,9 +114,6 @@ class ListarComprasTableViewController: UITableViewController {
             // Delete the row from the data source
             self.compras.delCompra(pos: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-            // print(" editando ")
         }
     }
     
@@ -109,7 +121,8 @@ class ListarComprasTableViewController: UITableViewController {
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        self.compras.moveCompra(origem: fromIndexPath.row, destino: to.row)
+        let objetoMovido = self.compras.get(pos: fromIndexPath.row)
+        self.compras.moveCompra(objeto: objetoMovido, origem: fromIndexPath.row, destino: to.row)
     }
     
 
@@ -128,12 +141,17 @@ class ListarComprasTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let indexPath = tableView.indexPathForSelectedRow{
-            let selectedRow = indexPath.row
-            let detalheCompra = segue.destination as! ListarItensTableViewController
-            detalheCompra.compra = self.compras.get(pos: selectedRow)
-            detalheCompra.title = self.compras.get(pos: selectedRow).titulo
+        
+        if (segue.identifier == "compras_itens") {
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let selectedRow = indexPath.row
+                let detalheCompra = segue.destination as! ListarItensTableViewController
+                detalheCompra.compra = self.compras.get(pos: selectedRow)
+                detalheCompra.title = self.compras.get(pos: selectedRow).titulo
+                detalheCompra.listaCompras = self.compras
+            }    
         }
+        
         
     }
     

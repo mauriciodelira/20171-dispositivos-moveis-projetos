@@ -15,19 +15,19 @@ class ListaCompras: NSObject {
         super.init()
         
         let obj = NSKeyedUnarchiver.unarchiveObject(withFile: self.diretorio())
-        print("listaCompra | obj lista compras = \(obj)")
+        // print("listaCompra | obj lista compras = \(obj)")
         if (obj != nil) {
-            print("listaCompra | achou arquivo de feiras!! inicia com o que tem")
+            // print("listaCompra | achou arquivo de feiras!! inicia com o que tem")
             self.compras = obj as! Array<Compra>
-            print("listaCompra | no arquivo tinha \(compras.count) feiras")
+            // print("listaCompra | no arquivo tinha \(compras.count) feiras")
             
             for compra in self.compras {
-                print("na compra tem \(compra.size()) coisas")
-                print("itens: \(compra.itens)")
+                print("lista | na compra tem \(compra.size()) coisas")
+                print("- itens da compra acima: \(compra.itens)")
             }
         }
         else {
-            print("listaCompra | nao achou arquivo de compras, inicia arr vazio")
+            // print("listaCompra | nao achou arquivo de compras, inicia arr vazio")
             self.compras = Array<Compra>()
         }
     }
@@ -35,35 +35,34 @@ class ListaCompras: NSObject {
     func diretorio() -> String {
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
-        let docPath = "\(path)/feiras.dat"
+        let docPath = "\(path)/listaFeiras.dat"
         
         return docPath
         
     }
     
     func salvar() {
-        print("listaCompra | salvar no arquivo, persistindo self.compras")
-        print("listaCompra | salvando em: \(self.diretorio())")
+        // print("listaCompra | salvar no arquivo, persistindo self.compras")
+        print("lista | salvando em: \(self.diretorio())")
         NSKeyedArchiver.archiveRootObject(self.compras, toFile: self.diretorio())
     }
     
     func addCompra(nova: Compra) {
-        print("listaCompra | add compra: \(nova.description)")
+        print("lista | add compra: \(nova.description)")
         self.compras.append(nova)
         self.salvar()
     }
     
+    
     func delCompra(pos: Int) {
-        print("listaCompra | deletar compra: pos \(pos)")
+        // print("listaCompra | deletar compra: pos \(pos)")
         self.compras.remove(at: pos)
         self.salvar()
     }
-    
-    func moveCompra(origem: Int, destino: Int){
-        print("listaCompra | Move: origem \(origem) - dest \(destino)")
-        let aux = self.compras[origem]
-        self.compras[origem] = self.compras[destino]
-        self.compras[destino] = aux
+        
+    func moveCompra(objeto: Compra, origem: Int, destino: Int){
+        self.compras.remove(at: origem)
+        self.compras.insert(objeto, at: destino)
         self.salvar()
     }
     
@@ -76,7 +75,7 @@ class ListaCompras: NSObject {
     }
     
     func totalCompras() -> Float {
-        print("listaCompra | total R$)")
+        // print("listaCompra | total R$)")
         
         var tot: Float = 0.0
         
@@ -88,7 +87,7 @@ class ListaCompras: NSObject {
     }
     
     func totalCompras(pos: Int) -> Float {
-        print("listaCompra | total qtd")
+        // print("listaCompra | total qtd")
 
         return self.compras[pos].totalValor()
     }

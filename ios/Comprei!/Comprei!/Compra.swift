@@ -19,32 +19,18 @@ class Compra: NSObject, NSCoding {
     }
 
     override init() {
-        super.init()
-        
-        // pega do banco. se nao existir, inicializa o array
-        let obj = NSKeyedUnarchiver.unarchiveObject(withFile: self.diretorio())
-        print("compra | obj lista compras = \(obj)")
-        
-        if (obj != nil) {
-            print("compra | buscou arquivo de itens")
-            var temp = obj as! Compra
-            self.itens = temp.itens
-            print("compra | no arquivo tinha \(self.itens.count) compras")
-        }
-        else {
-            print("compra | nao achou arquivo de itens, inicia arr vazio")
             self.itens = Array<Item>()
-        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
-        print("descodificando uma compra")
+        // print("descodificando uma compra")
         self.itens = aDecoder.decodeObject(forKey: "itens") as! Array<Item>
         self.titulo = aDecoder.decodeObject(forKey: "titulo") as! String
     }
     
     func encode(with aCoder: NSCoder) {
-        print("tá persistindo uma compra com X itens: \(self.itens.count)")
+        // print("tá persistindo uma compra com X itens: \(self.itens.count)")
         aCoder.encode(self.itens, forKey: "itens")
         aCoder.encode(self.titulo, forKey: "titulo")
     }
@@ -53,35 +39,37 @@ class Compra: NSObject, NSCoding {
     func diretorio() -> String {
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0]
         
-        let docPath = "\(path)/itens.dat"
+        let docPath = "\(path)/itensFeira.dat"
                 
         return docPath
     }
     
     func salvar(){
-        print("compra | salvar()")
         print("compra | salvando em: \(self.diretorio())")
         NSKeyedArchiver.archiveRootObject(self, toFile: self.diretorio())
     }
     
-    func addItem(novo: Item){
+    func addItem(novo: Item!){
         print("compra | add item:\(novo.nome)")
-        self.itens.append(novo)
-        self.salvar()
+        if (self.itens.contains(novo)) {
+            let posExistente = self.itens.index(of: novo)
+            print(self.itens[posExistente!])
+        } else {
+            print("vai ser appendado")
+            self.itens.append(novo)
+        }
+        // self.salvar()
     }
     
     func delItem(pos: Int){
-        print("compra | del item:\(pos)")
+        // print("compra | del item:\(pos)")
         self.itens.remove(at: pos)
         self.salvar()
     }
     
-    func moveItem(origem: Int, destino: Int){
-        print("compra | origem:\(origem) - dest: \(destino)")
-        let aux = self.itens[origem]
-        self.itens[origem] = self.itens[destino]
-        self.itens[destino] = aux
-        self.salvar()
+    func moveItem(objeto: Item, origem: Int, destino: Int){
+        self.itens.remove(at: origem)
+        self.itens.insert(objeto, at: destino)
     }
     
     func size()-> Int {
@@ -94,7 +82,7 @@ class Compra: NSObject, NSCoding {
     
     // quantidade de itens total da compra
     func totalQtd()-> Int {
-        print("compra| total itens")
+        // print("compra| total itens")
         var tot: Int = 0
         
         for item in itens{
@@ -106,7 +94,7 @@ class Compra: NSObject, NSCoding {
     
     // valor total da compra
     func totalValor() -> Float {
-        print("compra| total R$")
+        // print("compra| total R$")
         var tot: Float = 0.0
         
         for item in itens {
