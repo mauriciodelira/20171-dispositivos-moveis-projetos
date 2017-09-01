@@ -121,7 +121,8 @@ class ListarComprasTableViewController: UITableViewController {
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        self.compras.moveCompra(origem: fromIndexPath.row, destino: to.row)
+        let objetoMovido = self.compras.get(pos: fromIndexPath.row)
+        self.compras.moveCompra(objeto: objetoMovido, origem: fromIndexPath.row, destino: to.row)
     }
     
 

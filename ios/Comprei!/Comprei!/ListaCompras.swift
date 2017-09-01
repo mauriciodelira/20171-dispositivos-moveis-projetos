@@ -59,12 +59,10 @@ class ListaCompras: NSObject {
         self.compras.remove(at: pos)
         self.salvar()
     }
-    
-    func moveCompra(origem: Int, destino: Int){
-        // print("listaCompra | Move: origem \(origem) - dest \(destino)")
-        let aux = self.compras[destino]
-        self.compras[destino] = self.compras[origem]
-        self.compras[origem] = aux
+        
+    func moveCompra(objeto: Compra, origem: Int, destino: Int){
+        self.compras.remove(at: origem)
+        self.compras.insert(objeto, at: destino)
         self.salvar()
     }
     

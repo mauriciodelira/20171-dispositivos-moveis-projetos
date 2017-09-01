@@ -134,7 +134,11 @@ class ListarItensTableViewController: UITableViewController {
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        self.compra.moveItem(origem: fromIndexPath.row, destino: to.row)
+        
+        let objetoMovido = self.compra.get(pos: fromIndexPath.row)
+        self.compra.moveItem(objeto: objetoMovido, origem: fromIndexPath.row, destino: to.row)
+        
+        // self.compra.moveItem(origem: fromIndexPath.row, destino: to.row)
         self.listaCompras.salvar()
     }
     

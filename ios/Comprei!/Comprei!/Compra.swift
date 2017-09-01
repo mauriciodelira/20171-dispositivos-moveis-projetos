@@ -67,11 +67,9 @@ class Compra: NSObject, NSCoding {
         self.salvar()
     }
     
-    func moveItem(origem: Int, destino: Int){
-        // print("compra | origem:\(origem) - dest: \(destino)")
-        let aux = self.itens[origem]
-        self.itens[origem] = self.itens[destino]
-        self.itens[destino] = aux
+    func moveItem(objeto: Item, origem: Int, destino: Int){
+        self.itens.remove(at: origem)
+        self.itens.insert(objeto, at: destino)
     }
     
     func size()-> Int {
