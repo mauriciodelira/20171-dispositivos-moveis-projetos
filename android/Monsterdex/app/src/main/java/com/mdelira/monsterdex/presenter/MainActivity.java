@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void puxarPokemon(){
-        PokeAPIService service = retrofit.create(PokeAPIService.class);
-        Call<PokemonResponse> pokemonResponseCall = service.obterListaPokemon();
+        PokeAPIService service = retrofit.create(PokeAPIService.class); // define quais serão os métodos HTTP que pode lançar
+        Call<PokemonResponse> pokemonResponseCall = service.obterListaPokemon(); // dá o GET nessa hora
 
         pokemonResponseCall.enqueue(new Callback<PokemonResponse>() {
             @Override

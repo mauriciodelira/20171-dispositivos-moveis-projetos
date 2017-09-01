@@ -25,17 +25,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // retrofit -> API para conexao HTTP
+    // retrofit GSON -> converte JSON pra GSON
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     testCompile 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'me.sargunvohra.lib:pokekotlin:2.3.0' // PokeApiClient -> puxar dados pela API
-    compile 'com.squareup.retrofit2:retrofit:2.1.0' // retrofit -> API para conexao HTTP
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0' // retrofit GSON -> converte JSON pra GSON
-
 }
 repositories {
     mavenCentral()
-    maven { url 'http://jcenter.bintray.com' } // PokeApiClient -> puxar desse repositório do JCenter
+    maven { url 'http://jcenter.bintray.com' }
+    // PokeApiClient -> puxar desse repositório do JCenter
 }

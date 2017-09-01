@@ -8,4 +8,5 @@
 
     <string name="action_menu_refresh">Atualizar</string>
     <string name="action_menu_refreshing">Buscando no PC do professor Oak...</string>
+    <string name="title_activity_pokemon_detalhes">PokemonDetalhesActivity</string>
 </resources>
