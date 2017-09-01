@@ -20,6 +20,8 @@ class ListarItensTableViewController: UITableViewController {
     var compra: Compra!
     var listaCompras: ListaCompras!
     
+    @IBOutlet weak var btNavBarButtonAdd: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +29,7 @@ class ListarItensTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItems = [self.btNavBarButtonAdd, self.editButtonItem]
     }
     
     override func viewWillAppear(_ animated: Bool) {

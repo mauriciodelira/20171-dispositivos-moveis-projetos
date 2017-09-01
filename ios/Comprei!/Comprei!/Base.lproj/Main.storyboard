@@ -155,6 +155,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btNavBarButtonAdd" destination="Q3O-fU-8II" id="Dxj-Xc-5ox"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxB-6j-cJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
