@@ -51,8 +51,14 @@ class Compra: NSObject, NSCoding {
     
     func addItem(novo: Item!){
         print("compra | add item:\(novo.nome)")
-        self.itens.append(novo)
-        self.salvar()
+        if (self.itens.contains(novo)) {
+            let posExistente = self.itens.index(of: novo)
+            print(self.itens[posExistente!])
+        } else {
+            print("vai ser appendado")
+            self.itens.append(novo)
+        }
+        // self.salvar()
     }
     
     func delItem(pos: Int){

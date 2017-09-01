@@ -97,11 +97,17 @@ class FormularioViewController: UIViewController {
             comprado = false
         }
         
-        let novoItem = Item(nome: name!, valor: valor!, qtde: qtd, comprado: comprado)
+        if( self.item == nil ) {
+            let novoItem = Item(nome: name!, valor: valor!, qtde: qtd, comprado: comprado)
+            self.compra.addItem(novo: novoItem)
+        } else {
+            self.item?.nome = name
+            self.item?.valor = valor
+            self.item?.qtde = qtd
+            self.item?.comprado = comprado
+            self.compra.addItem(novo: self.item)
+        }
         
-        print(self.compra)
-        
-        self.compra.addItem(novo: novoItem)
         self.listaCompras.salvar()
         self.navigationController?.popViewController(animated: true)
     }
