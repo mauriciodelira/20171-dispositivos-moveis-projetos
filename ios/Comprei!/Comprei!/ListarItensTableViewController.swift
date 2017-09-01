@@ -62,9 +62,9 @@ class ListarItensTableViewController: UITableViewController {
         cell.lbNomeItem.text = item.nome
         
         if(item.qtde != 1) {
-            cell.lbQtdItens.text = "\(String(item.qtde)) itens"
+            cell.lbQtdItens.text = "\(String(item.qtde)) unidades"
         } else {
-            cell.lbQtdItens.text = "\(String(item.qtde)) item"
+            cell.lbQtdItens.text = "\(String(item.qtde)) un."
         }
         
         
