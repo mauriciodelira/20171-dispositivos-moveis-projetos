@@ -1,6 +1,7 @@
 package com.mdelira.monsterdex.presenter;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mdelira.monsterdex.R;
 import com.mdelira.monsterdex.models.PokemonEntry;
 
@@ -16,9 +18,11 @@ import java.util.ArrayList;
 public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.ViewHolder> {
 
     private ArrayList<PokemonEntry> dados;
+    private Context context;
 
-    public ListPokemonAdapter(){
+    public ListPokemonAdapter(Context context){
         this.dados = new ArrayList<>();
+        this.context = context;
     }
 
     public void addDados(ArrayList<PokemonEntry> novosDados){
@@ -36,7 +40,11 @@ public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         // ao setar a view
         PokemonEntry p = dados.get(position);
-        holder.pokemonName.setText(p.getName());
+        holder.pokemonName.setText(p.getNome());
+
+        Glide.with(context)
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + p.getNumero() + ".png")
+                .into(holder.pokemonImage);
     }
 
     @Override

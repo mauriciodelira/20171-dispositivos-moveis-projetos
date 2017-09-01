@@ -1,6 +1,7 @@
 package com.mdelira.monsterdex.presenter;
 
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -11,11 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.mdelira.monsterdex.R;
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity
     private Retrofit retrofit;
     private RecyclerView recyclerView;
     private ListPokemonAdapter pokemonAdapter;
+
+    private int offset;
+    private boolean aptoParaCarregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +81,50 @@ public class MainActivity extends AppCompatActivity
 */
 
         this.recyclerView = (RecyclerView) findViewById(R.id.rvMainPokemon);
-        this.pokemonAdapter = new ListPokemonAdapter();
+        this.pokemonAdapter = new ListPokemonAdapter(this);
         this.recyclerView.setAdapter(this.pokemonAdapter);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        this.recyclerView.setLayoutManager(layoutManager);
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
         this.recyclerView.setHasFixedSize(true);
+        this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView rv, int dx, int dy){
+                super.onScrolled(rv, dx, dy);
+
+                if(dy > 0){
+                    int visibleIntCount = layoutManager.getChildCount();
+                    int totalItemCount = layoutManager.getItemCount();
+                    int pastVisibleItens = layoutManager.findFirstVisibleItemPosition();
+
+                    if(aptoParaCarregar){
+                        if((visibleIntCount + pastVisibleItens) >= totalItemCount){
+                            Log.i("MONSTERDEX", "Chegamos ao final");
+
+                            aptoParaCarregar = false;
+                            offset += 20;
+                            puxarPokemon(offset);
+                        }
+                    }
+                }
+            }
+        });
 
         // RETROFIT -> substitui a task de puxar dados enviando uma requisição GET para a url base definida
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://pokeapi.co/api/v2/") // URL base dos HTTP GET
-                .addConverterFactory(GsonConverterFactory.create()) // a fábrica que irá receber as respostas do GET na URL acima
+                .addConverterFactory(GsonConverterFactory.create()) // a fábrica que irá receber as respostas do GET na URL acima e converter Gson em objetos
                 .build();
 
-        puxarPokemon();
+        aptoParaCarregar = true;
+        this.offset = 0;
+        puxarPokemon(this.offset);
 
     }
 
-    private void puxarPokemon(){
-        PokeAPIService service = retrofit.create(PokeAPIService.class);
-        Call<PokemonResponse> pokemonResponseCall = service.obterListaPokemon();
+    private void puxarPokemon(int offset){
+        PokeAPIService service = retrofit.create(PokeAPIService.class); //instancia um objeto da interface com o retrofit
+        Call<PokemonResponse> pokemonResponseCall = service.obterListaPokemon(20, 40); //resposta
 
         pokemonResponseCall.enqueue(new Callback<PokemonResponse>() {
             @Override
@@ -100,8 +132,10 @@ public class MainActivity extends AppCompatActivity
                 // Quando obtiver resposta, faça...
                 // deve checar primeiro se o código HTTP é de sucesso
                 if(response.isSuccessful()) {
+                    //pega o corpo da resposta
                     PokemonResponse pokemonResponse = response.body();
 
+                    //joga em um arraylist de Pokemons
                     ArrayList<PokemonEntry> listaPokemon = pokemonResponse.getResults();
 
                     // TODO persiste no banco local caso não exista ainda
@@ -120,6 +154,7 @@ public class MainActivity extends AppCompatActivity
             public void onFailure(Call<PokemonResponse> call, Throwable t) {
                 // Se der erro de alguma forma, faça...
                 // ex: falha na conexão, modo avião, timeout.
+                aptoParaCarregar = true;
                 Toast.makeText(MainActivity.this, getString(R.string.conn_error_fetch_pokemon), Toast.LENGTH_SHORT).show();
                 Log.e("MONSTERDEX", "Main > puxarPokemon() > onFailure() |"+t.getMessage());
             }
@@ -153,7 +188,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_menu_refresh) {
-            puxarPokemon();
+            puxarPokemon(this.offset);
             Toast.makeText(this, getString(R.string.action_menu_refreshing), Toast.LENGTH_SHORT).show();
             return true;
         }
